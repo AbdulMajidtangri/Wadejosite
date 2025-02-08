@@ -27,16 +27,7 @@ dropdowns.forEach((dropdown) => {
   });
 });
 
-// ========== MOBILE DROPDOWN FUNCTIONALITY ==========
-dropdowns.forEach(dropdown => {
-    const dropdownBtn = dropdown.querySelector('.dropbtn');
-    dropdownBtn.addEventListener('click', (e) => {
-        if (window.innerWidth <= 992) {
-            e.preventDefault();
-            dropdown.classList.toggle('active');
-        }
-    });
-});
+
 
 // ========== SEARCH FUNCTIONALITY ==========
 const searchBtn = document.querySelector('.search-btn');
