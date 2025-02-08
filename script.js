@@ -1,30 +1,43 @@
+// ========== HAMBURGER MENU FUNCTIONALITY ==========
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const dropdowns = document.querySelectorAll('.dropdown');
 
-// Toggle mobile menu
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     hamburger.classList.toggle('active');
 });
 
-// Dropdown functionality for mobile
+// Close mobile menu when clicking outside
+// Enhanced Mobile Dropdown Functionality
 dropdowns.forEach((dropdown) => {
+  const dropdownBtn = dropdown.querySelector('.dropbtn');
+  dropdownBtn.addEventListener('click', (e) => {
+    if (window.innerWidth <= 992) {
+      e.preventDefault();
+      dropdown.classList.toggle('active');
+
+      // Close other open dropdowns
+      dropdowns.forEach((otherDropdown) => {
+        if (otherDropdown !== dropdown) {
+          otherDropdown.classList.remove('active');
+        }
+      });
+    }
+  });
+});
+
+// ========== MOBILE DROPDOWN FUNCTIONALITY ==========
+dropdowns.forEach(dropdown => {
     const dropdownBtn = dropdown.querySelector('.dropbtn');
     dropdownBtn.addEventListener('click', (e) => {
         if (window.innerWidth <= 992) {
             e.preventDefault();
             dropdown.classList.toggle('active');
-
-            // Close other open dropdowns
-            dropdowns.forEach((otherDropdown) => {
-                if (otherDropdown !== dropdown) {
-                    otherDropdown.classList.remove('active');
-                }
-            });
         }
     });
 });
+
 // ========== SEARCH FUNCTIONALITY ==========
 const searchBtn = document.querySelector('.search-btn');
 const searchOverlay = document.querySelector('.search-overlay');
