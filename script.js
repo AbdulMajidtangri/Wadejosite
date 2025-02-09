@@ -14,7 +14,7 @@ dropdowns.forEach((dropdown) => {
     const dropdownBtn = dropdown.querySelector('.dropbtn');
   
     dropdownBtn.addEventListener('click', (e) => {
-        if (window.innerWidth <= 992) {
+        if (window.innerWidth <= 1200) {
             e.preventDefault(); // Prevent navigation on mobile
 
             if (dropdown.classList.contains('active')) {
@@ -36,7 +36,7 @@ document.addEventListener('click', (e) => {
 
 // Ensure dropdowns close when resizing back to desktop
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 992) {
+    if (window.innerWidth > 1200) {
         dropdowns.forEach((dropdown) => dropdown.classList.remove('active'));
         navLinks.classList.remove('active');
         hamburger.classList.remove('active');
