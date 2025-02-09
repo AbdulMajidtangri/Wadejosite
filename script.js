@@ -3,39 +3,44 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const dropdowns = document.querySelectorAll('.dropdown');
 
+// Toggle Mobile Menu
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     hamburger.classList.toggle('active');
 });
 
-// Enhanced Mobile Dropdown Functionality
+// Mobile Dropdown Functionality (Fix for Double Click Issue)
 dropdowns.forEach((dropdown) => {
-  const dropdownBtn = dropdown.querySelector('.dropbtn');
+    const dropdownBtn = dropdown.querySelector('.dropbtn');
   
-  dropdownBtn.addEventListener('click', (e) => {
-    if (window.innerWidth <= 992) {
-      e.preventDefault();
-      
-      // Toggle the clicked dropdown
-      dropdown.classList.toggle('active');
+    dropdownBtn.addEventListener('click', (e) => {
+        if (window.innerWidth <= 992) {
+            e.preventDefault(); // Prevent navigation on mobile
 
-      // Close other dropdowns if one is opened
-      dropdowns.forEach((otherDropdown) => {
-        if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
-          otherDropdown.classList.remove('active');
+            if (dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active'); // Close if already open
+            } else {
+                dropdowns.forEach((otherDropdown) => otherDropdown.classList.remove('active')); // Close others
+                dropdown.classList.add('active'); // Open clicked dropdown
+            }
         }
-      });
-    }
-  });
+    });
 });
 
 // Close dropdowns when clicking outside
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.dropdown') && !e.target.closest('.dropbtn')) {
-    dropdowns.forEach((dropdown) => {
-      dropdown.classList.remove('active');
-    });
-  }
+    if (!e.target.closest('.dropdown')) {
+        dropdowns.forEach((dropdown) => dropdown.classList.remove('active'));
+    }
+});
+
+// Ensure dropdowns close when resizing back to desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+        dropdowns.forEach((dropdown) => dropdown.classList.remove('active'));
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
 });
 
 
