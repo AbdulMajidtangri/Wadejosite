@@ -8,18 +8,20 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
-// Close mobile menu when clicking outside
 // Enhanced Mobile Dropdown Functionality
 dropdowns.forEach((dropdown) => {
   const dropdownBtn = dropdown.querySelector('.dropbtn');
+  
   dropdownBtn.addEventListener('click', (e) => {
     if (window.innerWidth <= 992) {
       e.preventDefault();
+      
+      // Toggle the clicked dropdown
       dropdown.classList.toggle('active');
 
-      // Close other open dropdowns
+      // Close other dropdowns if one is opened
       dropdowns.forEach((otherDropdown) => {
-        if (otherDropdown !== dropdown) {
+        if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
           otherDropdown.classList.remove('active');
         }
       });
@@ -27,6 +29,14 @@ dropdowns.forEach((dropdown) => {
   });
 });
 
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dropdown') && !e.target.closest('.dropbtn')) {
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove('active');
+    });
+  }
+});
 
 
 // ========== SEARCH FUNCTIONALITY ==========
